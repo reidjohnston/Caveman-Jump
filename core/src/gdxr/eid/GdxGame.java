@@ -12,7 +12,6 @@ public class GdxGame extends Game {
     public void create() {
         this.setScreen(new ScrMenu(this));
     }
-    
 
     @Override
     public void render() {
