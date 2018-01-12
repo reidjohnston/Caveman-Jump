@@ -6,6 +6,7 @@ public class GdxGame extends Game {
 
     ScrMenu scrMenu;
     ScrPlay scrPlay;
+    ScrContr scrContr;
     int nScreen;
 
     @Override
