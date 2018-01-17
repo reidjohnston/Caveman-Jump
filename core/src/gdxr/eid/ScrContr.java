@@ -1,6 +1,5 @@
 package gdxr.eid;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -14,14 +13,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class ScrContr implements Screen {
 
-    Game game;
+    GdxGame game;
     Button btnPlay;
     Button btnMenu;
-     SpriteBatch batch;
+    SpriteBatch batch;
     OrthographicCamera oc;
-
-    public ScrContr(Game game) {
-        this.game = game;
+    
+//Joel tought me what all the games mean :-)
+    public ScrContr(GdxGame game) {
+       this.game = game;
     }
 
     @Override
@@ -36,10 +36,12 @@ public class ScrContr implements Screen {
 
     private void changeScreen() {
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-            game.setScreen(new ScrPlay(game));
+            game.updateState(1);
+          
         }
          if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-            game.setScreen(new ScrMenu(game));
+             game.updateState(0);
+             
         }
           if (Gdx.input.justTouched()) {
           if (btnPlay.isMousedOver()) {

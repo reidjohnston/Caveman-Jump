@@ -17,13 +17,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 // screen 0 is menu and 1 is play
 public class ScrMenu implements Screen {
     Texture txtBack;
-    Game game;
+    GdxGame game;
     Button btnPlay;
     Button btnContr;
     SpriteBatch batch;
     OrthographicCamera oc;
 
-    public ScrMenu(Game game) {
+    public ScrMenu(GdxGame game) {
         this.game = game;
         
     }
@@ -35,16 +35,16 @@ public class ScrMenu implements Screen {
         oc.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         oc.update();
         batch = new SpriteBatch();
-        btnPlay = new Button(275, 140, 80, 80, "play.psd");
+        btnPlay = new Button(265,0,150,90,"playword.psd");
         btnContr = new Button(400, 140, 100, 80, "Contr.jpg");
 
     }
 
     private void changeScreen() {
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-            game.setScreen(new ScrPlay(game));
+             game.updateState(1);
         } else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            game.setScreen(new ScrContr(game));
+             game.updateState(2);
         }
         if (Gdx.input.justTouched()) {
             if (btnPlay.isMousedOver()) {
