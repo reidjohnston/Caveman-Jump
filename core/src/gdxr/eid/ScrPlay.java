@@ -14,6 +14,7 @@ public class ScrPlay implements Screen {
     SpriteBatch batch;
     OrthographicCamera oc;
     Hero Hero1;
+    float fFallSpeed = 0;
 
     public ScrPlay(Game game) {
         this.game = game;
@@ -25,20 +26,9 @@ public class ScrPlay implements Screen {
         oc.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         oc.update();
         batch = new SpriteBatch();
-        Hero1 = new Hero(100, 100, Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() - 100);
+       // Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
 
     }
-
-    private void changeScreen() {
-        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-            game.setScreen(new ScrMenu(game));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            game.setScreen(new ScrContr(game));
-        }
-    }
-    
-    
 
     @Override
     public void render(float f) {
@@ -48,19 +38,26 @@ public class ScrPlay implements Screen {
         batch.setProjectionMatrix(oc.combined);
         Hero1.draw(batch);
         batch.end();
-        changeScreen();
         KeyPressed();
-    }
-
-    public void KeyPressed () {      
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            Hero1.setY(Hero1.getY() - 5);
+        
+        if (Hero1.getY() >= Gdx.graphics.getHeight() / 2 + 100) {            
+            fFallSpeed = 0;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            Hero1.setY(Hero1.getY() + 5);
+        if (Hero1.getY() < Gdx.graphics.getHeight() / 2 + 100) {
+            fFallSpeed = fFallSpeed + 0.35f;           
+            Hero1.setY(Hero1.getY() + fFallSpeed);
         }       
     }
-    
+
+    public void KeyPressed() {
+        if (Hero1.getY() >= Gdx.graphics.getHeight() / 2 + 100) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                fFallSpeed = -10;
+                Hero1.setY(Hero1.getY() + fFallSpeed);
+            }
+        }
+    }
+
     @Override
     public void resize(int i, int i1) {
         return;
